@@ -1,0 +1,41 @@
+import os
+from read_from_csv import calculate_G, calculate_S, calculate_H
+
+
+def read_from_csv(lib, temperature, path, file_name):
+	H_list = []
+	S_list = []
+	G_list = []
+
+	os.chdir(path)	
+
+	directory = f"{lib}_data"
+	if os.path.exists(f"{directory}/csv"):
+		print("CSV folder exists")
+		os.chdir(f"{directory}/csv")
+		
+		fin = open(file_name)
+		reader = csv.reader(fin)
+		data = []
+		if (temperature > 100 and temperature < 1074.56):
+			for i in reader:
+				data.append(float(i[0]))
+		else:
+			for i in reader:
+				data.append(float(i[1]))
+
+		H = calculate_H(data, temperature)
+		S = calculate_S(data, temperature)
+		G = calculate_G(S, H, temperature)
+
+	return [H, S, G]
+
+
+lib = "BurcatNS"
+path = os.getcwd()
+temperature = 600
+file_name = "46.csv"
+
+result = read_from_csv(lib, temperature, path, file_name)
+for i in result:
+	print(i)

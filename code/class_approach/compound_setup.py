@@ -16,5 +16,4 @@ plt.show()
 
 
 
-nx.add_edge("H1", "N1", )
-"H2", "H3", 
+nx.add_edge("H1", "N1", "H2", "H3")
