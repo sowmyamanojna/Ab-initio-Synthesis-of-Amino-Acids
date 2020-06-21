@@ -47,6 +47,7 @@ def write_csv(num):
 	# for i,j in enumerate(td_list):
 	# 	print(i, "\t", j)
 	td_list = td_list[4:39]
+	print(td_list)
 	for i,j in enumerate(td_list):
 		if i%4 == 2 or i%4 == 3 :
 			if "{" not in j.text:
@@ -77,6 +78,7 @@ link_lists = rmg_link_lists()
 # link_lists = ["CurranPentane", "USC-Mech-ii", "JetSurF2.0", "FFCM1(-)", "Lai_Hexylbenzene", "SulfurHaynes", "BurcatNS", "Chernov"]
 
 for lib in link_lists:
+	path = os.pwd()
 	os.chdir("/home/sowmya/Desktop/bt5240/project/code/get_data_rmg/")
 
 	print(lib)
