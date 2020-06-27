@@ -4,8 +4,8 @@ import networkx as nx
 
 def generate_random_graphs(G,bonds):
     nodes = list(nx.nodes(G))
-    connected_components = nx.connected_components(G)
-    A = nx.adjacency_matrix(G)
+    # connected_components = nx.connected_components(G)
+    # A = nx.adjacency_matrix(G)
     bonds -= nx.number_of_edges(G)
     
     print(nx.number_of_edges(G))
