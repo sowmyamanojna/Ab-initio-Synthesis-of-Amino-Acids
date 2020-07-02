@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width = device-width, initial-scale = 0.6" name="viewport"/><!-- For responsive mobile view -->
+<title>
+
+RMG Thermodynamics Libraries
+
+</title>
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet"/>
+<link href="/static/css/default.css?v=2.0" rel="stylesheet" type="text/css"/>
+<link href="/static/css/light-theme.css" id="css-theme" rel="stylesheet" type="text/css"/>
+<!-- Google Analytics Tracker -->
+<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-24556433-1']);
+      _gaq.push(['_setDomainName', 'rmg.mit.edu']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+<script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script async="" crossorigin="anonymous" integrity="sha256-fCth3p2B4cZMzlr7OFizmo5RkdJAHJ4vOHpE7FaNcR8=" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+<script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+<script>
+        // Check for cookie
+        if (document.cookie.indexOf("rmg-theme=light") < 0) {
+            document.getElementById('css-theme').disabled = true;
+        };
+
+        toggleCSS = function() {
+            var themeElement = document.getElementById('css-theme');
+            if (themeElement.disabled) {
+                themeElement.disabled = false;
+                var expiry = new Date();
+                // Create cookie expiring in one year
+                expiry.setTime(expiry.getTime() + (365*24*60*60*1000));
+                document.cookie = "rmg-theme=light;path='/';expires=" + expiry.toUTCString();
+            } else {
+                themeElement.disabled = true;
+                // Remove cookie
+                document.cookie = "rmg-theme=;path='/';expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        };
+    </script>
+<style>
+table.thermoEntryData {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+table.thermoEntryData td.key {
+    font-weight: bold;
+    text-align: right;
+}
+
+table.thermoEntryData td.equals {
+    text-align: center;
+}
+
+table.thermoEntryData td.value {
+    text-align: left;
+}
+
+table.thermoEntryData td.reference p {
+    margin: 0px;
+}
+</style>
+<script src="https://code.highcharts.com/6/highcharts.js"></script>
+<script src="/static/js/highcharts.theme.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+    var Cpseries = new Array();
+    var Hseries = new Array();
+    var Sseries = new Array();
+    var Gseries = new Array();
+
+    
+    Tlist = [298.0, 308.0, 318.0, 328.0, 338.0, 348.0, 358.0, 368.0, 378.0, 388.0, 398.0, 408.0, 418.0, 428.0, 438.0, 448.0, 458.0, 468.0, 478.0, 488.0, 498.0, 508.0, 518.0, 528.0, 538.0, 548.0, 558.0, 568.0, 578.0, 588.0, 598.0, 608.0, 618.0, 628.0, 638.0, 648.0, 658.0, 668.0, 678.0, 688.0, 698.0, 708.0, 718.0, 728.0, 738.0, 748.0, 758.0, 768.0, 778.0, 788.0, 798.0, 808.0, 818.0, 828.0, 838.0, 848.0, 858.0, 868.0, 878.0, 888.0, 898.0, 908.0, 918.0, 928.0, 938.0, 948.0, 958.0, 968.0, 978.0, 988.0, 998.0, 1008.0, 1018.0, 1028.0, 1038.0, 1048.0, 1058.0, 1068.0, 1078.0, 1088.0, 1098.0, 1108.0, 1118.0, 1128.0, 1138.0, 1148.0, 1158.0, 1168.0, 1178.0, 1188.0, 1198.0, 1208.0, 1218.0, 1228.0, 1238.0, 1248.0, 1258.0, 1268.0, 1278.0, 1288.0, 1298.0, 1308.0, 1318.0, 1328.0, 1338.0, 1348.0, 1358.0, 1368.0, 1378.0, 1388.0, 1398.0, 1408.0, 1418.0, 1428.0, 1438.0, 1448.0, 1458.0, 1468.0, 1478.0, 1488.0, 1498.0, 1508.0, 1518.0, 1528.0, 1538.0, 1548.0, 1558.0, 1568.0, 1578.0, 1588.0, 1598.0, 1608.0, 1618.0, 1628.0, 1638.0, 1648.0, 1658.0, 1668.0, 1678.0, 1688.0, 1698.0, 1708.0, 1718.0, 1728.0, 1738.0, 1748.0, 1758.0, 1768.0, 1778.0, 1788.0, 1798.0, 1808.0, 1818.0, 1828.0, 1838.0, 1848.0, 1858.0, 1868.0, 1878.0, 1888.0, 1898.0, 1908.0, 1918.0, 1928.0, 1938.0, 1948.0, 1958.0, 1968.0, 1978.0, 1988.0, 1998.0];
+    Cplist = [12.004467342435582, 12.278442748126368, 12.546282358805236, 12.808122463319897, 13.064097625267395, 13.314340682994082, 13.558982749595634, 13.798153212917043, 14.03197973555262, 14.260588254846002, 14.484102982890136, 14.702646406527293, 14.916339287349064, 15.12530066169635, 15.329647840659385, 15.529496410077716, 15.724960230540205, 15.91615143738503, 16.10318044069971, 16.286155925321047, 16.465184850835204, 16.640372451577626, 16.811822236633102, 16.97963598983572, 17.143913769768908, 17.304753909765395, 17.462253017907244, 17.616505977025824, 17.76760594470183, 17.915644353265275, 18.060710909795493, 18.202893596121136, 18.342278668820164, 18.478950659219883, 18.61299237339688, 18.74448489217711, 18.873507571135793, 19.00013804059751, 19.124452205636135, 19.246524246074884, 19.36642661648627, 19.48423004619213, 19.60000353926364, 19.713814374521267, 19.825728105534818, 19.935808560623403, 20.044117842855467, 20.150716330048756, 20.25566267477036, 20.35901380433665, 20.460824920813362, 20.56114950101552, 20.660039296507467, 20.757544333602883, 20.85371291336476, 20.9485916116054, 21.04222527888643, 21.134657040518793, 21.225928296562763, 21.31607872182792, 21.40514626587317, 21.493167153006734, 21.580175882286156, 21.666205227518294, 21.75128623725933, 21.835448234814763, 21.91871881823941, 22.001123860337408, 22.082687508662207, 22.163432185516587, 22.24337858795266, 22.313799469378363, 22.38184572694694, 22.44974453552562, 22.517470207313703, 22.58499771210632, 22.652302677294507, 22.71936138786517, 22.786150786401084, 22.852648473080915, 22.918832705679193, 22.98468239956632, 23.050177127708597, 23.115297120668185, 23.180023266603108, 23.2443371112673, 23.308220858010547, 23.37165736777852, 23.434630159112768, 23.497123408150706, 23.559121948625634, 23.62061127186674, 23.681577526799057, 23.742007519943524, 23.801888715416947, 23.861209234931998, 23.919957857797243, 23.97812402091712, 24.035697818791924, 24.09267000351786, 24.14903198478698, 24.204775829887232, 24.259894263702424, 24.314380668712257, 24.368229084992286, 24.421434210213988, 24.47399139964465, 24.525896666147496, 24.577146680181595, 24.627738769801894, 24.677670920659214, 24.72694177600029, 24.77555063666767, 24.82349746109983, 24.870782865331105, 24.91740812299169, 24.963375165307696, 25.008686581101074, 25.05334561678966, 25.09735617638718, 25.140722821503218, 25.183450771343256, 25.225545902708635, 25.26701474999658, 25.30786450520018, 25.348103017908425, 25.387738795306156, 25.426781002174103, 25.4652394608889, 25.503124651422976, 25.540447711344726, 25.577220435818386, 25.61345527760403, 25.649165347057696, 25.68436441213122, 25.719066898372347, 25.753287888924703, 25.78704312452776, 25.820349003516913, 25.85322258182341, 25.885681572974345, 25.91774434809273, 25.949429935897463, 25.980758022703263, 26.011748952420778, 26.042423726556517, 26.072804004212852, 26.102912102088062, 26.132770994476253, 26.162404313267448, 26.191836347947547, 26.221092045598297, 26.25019701089733, 26.279177506118206, 26.308060451130288, 26.336873423398835, 26.36564465798504, 26.39440304754587, 26.423178142334258, 26.45200015019899, 26.480899936584667, 26.509909024531893, 26.539059594677024, 26.568384485252338, 26.597917192086026, 26.627691868602106, 26.65774332582048, 26.68810703235696, 26.718819114423194, 26.749916355826727, 26.78143619797099];
+    Hlist = [12.96700372614, 13.088423446997615, 13.212552128644182, 13.33932909601153, 13.468695028293716, 13.600591941694505, 13.734963172174872, 13.871753358200511, 14.010908423489292, 14.152375559758783, 14.296103209473742, 14.44204104859359, 14.59013996931993, 14.74035206284402, 14.89263060209427, 15.046930024483752, 15.203205914657666, 15.361414987240858, 15.521515069585297, 15.683465084517568, 15.847225033086385, 16.012755977310064, 16.180020022924012, 16.348980302128243, 16.519600956334852, 16.69184711891553, 16.86568489794901, 17.04108135896862, 17.218004507709743, 17.39642327285731, 17.5763074887933, 17.75762787834423, 17.940356035528662, 18.124464408304668, 18.309926281317342, 18.49671575864631, 18.684807746553176, 18.87417793622906, 19.06480278654208, 19.25665950678481, 19.449726039421844, 19.643981042837215, 19.839403874081935, 20.035974571621466, 20.23367383808324, 20.43248302300411, 20.63238410557788, 20.833359677402786, 21.03539292522898, 21.238467613706035, 21.44256806813044, 21.647679157193082, 21.853786275726748, 22.060875327453605, 22.268932707732716, 22.477945286307524, 22.687900390053322, 22.89878578572479, 23.11058966270343, 23.32330061574514, 23.53690762772762, 23.751400052397926, 23.96676759711993, 24.183000305621853, 24.400088540743695, 24.618022967184782, 24.836794534251244, 25.056394458603506, 25.276814207003774, 25.498045479063546, 25.720080189991076, 25.942875318950716, 26.166353656929715, 26.39051174191995, 26.615347970444528, 26.840860485436504, 27.067047182814903, 27.29390571806061, 27.52143351279236, 27.749627761342715, 27.978485437333973, 28.208003300254187, 28.43817790203308, 28.669005593618017, 28.900482531549972, 29.132604684539448, 29.365367840042513, 29.598767610836678, 29.832799441596894, 30.06745861547154, 30.302740260658318, 30.53863935698021, 30.775150742461545, 31.01226911990383, 31.24998906346178, 31.488305025219244, 31.727211341765184, 31.96670224076964, 32.20677184755964, 32.44741419169525, 32.68862321354542, 32.93039277086403, 33.1727166453658, 33.41558854930233, 33.6590021320379, 33.90295098662558, 34.147428656383134, 34.392428641468975, 34.63794440545812, 34.88396938191816, 35.13049698098522, 35.37752059593989, 35.62503360978324, 35.87302940181273, 36.121501354198166, 36.370442858557716, 36.61984732253379, 36.86970817636906, 37.12001887948239, 37.37077292704481, 37.62196385655546, 37.87358525441756, 38.12563076251435, 38.378094084785076, 38.630968993800934, 38.88424933734103, 39.13792904496833, 39.39200213460566, 39.64646271911159, 39.90130501285643, 40.15652333829825, 40.41211213255877, 40.66806595399925, 40.924379488796674, 41.18104755751943, 41.43806512170347, 41.69542729042818, 41.95312932689238, 42.211166654990286, 42.469534865887375, 42.728229724596495, 42.987247176553694, 43.24658335419424, 43.50623458352859, 43.76619739071827, 44.02646850865199, 44.28704488352141, 44.54792368139725, 44.80910229480514, 45.07057834930172, 45.332349710050394, 45.5944144883975, 45.85677104844814, 46.11941801364213, 46.382354273330044, 46.645578989349175, 46.90909160259936, 47.17289183961907, 47.43697971916131, 47.701355558769606, 47.966019981353966, 48.23097392176678, 48.49621863337885, 48.761755694655356, 49.02758701573168, 49.29371484498961, 49.56014177563301, 49.82687075226401, 50.09390507745885, 50.36124841834386, 50.62890481317146];
+    Slist = [11.321980731030331, 11.72271738868504, 12.119305598205017, 12.511814386774008, 12.900310629221721, 13.284859248803967, 13.665523389531428, 14.042364564751974, 14.415442785808025, 14.784816673891859, 15.150543557664983, 15.512679558761949, 15.871279666939374, 16.226397806339484, 16.57808689409976, 16.92639889234573, 17.271384854443617, 17.61309496625675, 17.95157858303991, 18.286884262513475, 18.619059794582448, 18.94815222810073, 19.274207895026237, 19.597272432266276, 19.917390801473346, 20.234607307017644, 20.548965612334438, 20.86050875481933, 21.169279159423525, 21.475318651082958, 21.778668466099383, 22.079369262577412, 22.377461130010328, 22.672983598096348, 22.965975644858467, 23.256475704132797, 23.544521672483427, 23.83015091559581, 24.113400274195055, 24.394306069530895, 24.672904108466934, 24.94922968820784, 25.22331760069499, 25.495202136698186, 25.76491708962814, 26.032495759092374, 26.297970954215117, 26.561374996739456, 26.82273972392891, 27.082096491283668, 27.339476175085586, 27.59490917478467, 27.84842541523876, 28.10005434881723, 28.349824957378253, 28.59776575412892, 28.843904785376264, 29.08826963217681, 29.330887411891673, 29.571784779653548, 29.81098792975166, 30.048522596939872, 30.284414057673246, 30.518687131277687, 30.751366181056675, 30.982475115339533, 31.212037388474617, 31.44007600177088, 31.66661350439112, 31.89167199419982, 32.11527311856812, 32.337403660647915, 32.558015302351365, 32.777134869149776, 32.99478969782798, 33.21100609570527, 33.42580938598848, 33.63922395099123, 33.851273273339324, 34.06197997527347, 34.27136585615436, 34.47945192826703, 34.68625845101732, 34.89180496360526, 35.0961103162564, 35.29919270008761, 35.5010696756767, 35.701758200404576, 35.90127465463135, 36.099634866766344, 36.29685413728701, 36.49294726176018, 36.68792855291339, 36.88181186180482, 37.07461059813398, 37.266337749735655, 37.45700590129619, 37.646627252328244, 37.83521363443995, 38.02277652793101, 38.20932707774674, 38.3948761088203, 38.579434140830216, 38.76301140240046, 38.94561784476804, 39.127263154941, 39.307956768371014, 39.48770788116062, 39.66652546182603, 39.844418262634555, 40.021394830535066, 40.19746351769926, 40.372632491689416, 40.546909745269026, 40.72030310587153, 40.89282024474026, 41.06446868575418, 41.235255813952385, 41.40518888376834, 41.57427502698741, 41.74252126043734, 41.90993449342293, 42.076521534915145, 42.242289100504465, 42.407243819126705, 42.571392239571665, 42.73474083678167, 42.89729601794889, 43.05906412841905, 43.22005145740792, 43.38026424353916, 43.53970868020921, 43.69839092078553, 43.856317083645145, 44.013493257058656, 44.16992550392565, 44.325619866366964, 44.480582370178865, 44.63481902915384, 44.788335849273665, 44.941138832777675, 45.09323398211247, 45.24462730376601, 45.3953248119901, 45.545332532416296, 45.694656505567, 45.84330279026738, 45.991277466960156, 46.138586640926576, 46.285236445417674, 46.43123304469776, 46.57658263700362, 46.72129145742229, 46.86536578068951, 47.008811923912354, 47.151636249217574, 47.29384516632851, 47.435445135073195, 47.57644266782521, 47.7168443318795, 47.856656751766145, 47.9958866115026, 48.13454065678752, 48.272625697137386, 48.41014860796771, 48.54711633262117, 48.68353588434325, 48.81941434820784, 48.95475888299399, 49.08957672301555, 49.223875179904454];
+    Glist = [9.593053468292961, 9.477826491282622, 9.358612948414985, 9.235453977149657, 9.108390035616774, 8.977460923110726, 8.842705798722621, 8.704163198371784, 8.56187105045386, 8.415866690288743, 8.266186873523079, 8.112867788618715, 7.95594506853927, 7.79545380173072, 7.631428542478575, 7.463903320712863, 7.2929116513224885, 7.1184865430327005, 6.940660506892219, 6.759465564410991, 6.574933255384327, 6.38709464543489, 6.1959803333004215, 6.001620457891647, 5.804044705142192, 5.603282314669859, 5.399362086266394, 5.192312386231239, 4.982161153562949, 4.76893590602053, 4.55266374606587, 4.333371366697162, 4.111085057182278, 3.8858307087001607, 3.657633819897638, 3.426519502368259, 3.1925124860590812, 2.95563712461106, 2.715917400637833, 2.473376930947557, 2.2280389717119236, 1.9799264235860645, 1.7290618367829287, 1.475467416105188, 1.2191650259376747, 0.9601761952030121, 0.6985221222828207, 0.4342236799068851, 0.1673014200122892, -0.10222442142549666, -0.37433391958785833, -0.6490074560329319, -0.9262257139385598, -1.2059696733670624, -1.48822060655026, -1.7729600731937991, -2.0601699157995155, -2.3498322550046846, -2.6419294849374584, -2.9364442685872123, -3.2333595331893736, -3.5326584656234776, -3.83432450782411, -4.138341352203842, -4.444692937087465, -4.753363442157095, -5.064337283907439, -5.377599111110706, -5.693133800290741, -6.010926451205881, -6.330962382339914, -6.653227570982386, -6.977705920863969, -7.304382903566015, -7.633243735900916, -7.964273902862614, -8.297459147560913, -8.632785461598024, -8.970239075867436, -9.30980645175483, -9.651474272723517, -9.995229436265692, -10.341059046204286, -10.68895040532872, -11.038891008349815, -11.390868535161129, -11.74487084439111, -12.100885967235865, -12.458902101558836, -12.818907606246876, -13.180890995811525, -13.544840935226091, -13.910746234986966, -14.27859584639249, -14.648378857028096, -15.02008448645086, -15.393702082065424, -15.769221115182576, -16.146631177254623, -16.525921976279886, -16.90708333336985, -17.290105179472928, -17.674977552248425, -18.061690593085483, -18.450234544261747, -18.840599746234894, -19.232776635064706, -19.626755739958746, -20.02252768093815, -20.420083166618596, -20.8194129921028, -21.22050803698068, -21.623359263432356, -22.02795771443144, -22.43429451204509, -22.842360855826175, -23.252148021295806, -23.663647358513046, -24.076850290727226, -24.49174831311245, -24.908332991579684, -25.326595961664218, -25.746528927486843, -26.168123660785753, -26.591372000015948, -27.016265849515907, -27.442797178737507, -27.870958021538204, -28.300740475533676, -28.732136701507347, -29.16513892287733, -29.599739425217642, -30.035930555831726, -30.473704723377622, -30.913054397542652, -31.353972108766, -31.796450448008255, -32.24048206656597, -32.68605967592986, -33.133176047686575, -33.58182401345999, -34.03199646489442, -34.483686353675765, -34.93688669159031, -35.391590550621245, -35.847791063079136, -36.30548142176864, -36.76465488018831, -37.22530475276231, -37.687424415105085, -38.15100730431618, -38.61604691930504, -39.082536821145595, -39.55047063345829, -40.019842042820876, -40.4906447992049, -40.962872716439, -41.43651967269766, -41.91157961101444, -42.38804653981888, -42.865914533498184, -43.345177732980176, -43.82583034633961, -44.30786664942552, -44.791280986509754, -45.276067770956445, -45.76222148591108, -46.24973668500903, -46.73860799310326, -47.22883010701105, -47.720397796277645];
+    Tunits = "K";
+    Cpunits = "cal/(mol*K)";
+    Hunits = "kcal/mol";
+    Sunits = "cal/(mol*K)";
+    Gunits = "kcal/mol";
+        
+    var Cpdata = new Array();
+var Hdata = new Array();
+var Sdata = new Array();
+var Gdata = new Array();
+for (var i = 0; i < Tlist.length; i++) {
+    Cpdata.push([Tlist[i], Cplist[i]]);
+    Hdata.push([Tlist[i], Hlist[i]]);
+    Sdata.push([Tlist[i], Slist[i]]);
+    Gdata.push([Tlist[i], Glist[i]]);
+}
+
+Cpseries.push(['', Cpdata]);
+Hseries.push(['', Hdata]);
+Sseries.push(['', Sdata]);
+Gseries.push(['', Gdata]);
+
+plotHeatCapacity = function(id, Cpseries) {
+
+    series = [];
+    for (var i = 0; i < Cpseries.length; i++)
+        series.push({
+            name: Cpseries[i][0],
+            data: Cpseries[i][1]
+        });
+    var legendEnabled = (Cpseries.length > 1);
+    
+    options = {
+        chart: {
+            renderTo: id,
+            defaultSeriesType: 'line'
+        },
+        title: { text: 'Heat capacity' },
+        xAxis: {
+            title: { text: 'Temperature (' + Tunits + ')' },
+            min: 0
+        },
+        yAxis: {
+            title: { text: 'Heat capacity (' + Cpunits + ')' }
+        },
+        legend: { enabled: legendEnabled },
+        series: series,
+        tooltip: {
+            formatter: function() {
+                if (legendEnabled == 0) {
+                    return 'Cp(' + Highcharts.numberFormat(this.x, 0, '.', '') +' K) = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' J/mol*K';
+                    } else {
+                    return this.series.name + ': Cp(' + Highcharts.numberFormat(this.x, 0, '.', '') +' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Cpunits + '';
+                    }        
+            }
+        }
+    }
+    
+    var chartCp = new Highcharts.Chart(options);
+};
+
+plotEnthalpy = function(id, Hseries) {
+
+    series = [];
+    for (var i = 0; i < Hseries.length; i++)
+        series.push({
+            name: Hseries[i][0],
+            data: Hseries[i][1]
+        });
+    var legendEnabled = (Hseries.length > 1);
+
+    options = {
+        chart: {
+            renderTo: id,
+            defaultSeriesType: 'line'
+        },
+        title: { text: 'Enthalpy' },
+        xAxis: {
+            title: { text: 'Temperature (' + Tunits + ')' },
+            min: 0
+        },
+        yAxis: {
+            title: { text: 'Enthalpy (' + Hunits + ')' }
+        },
+        legend: { enabled: legendEnabled },
+        series: series,
+        plotOptions: {
+            line: {
+                marker: { enabled: false }
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                if (legendEnabled == 0) {
+                    return 'H(' + Highcharts.numberFormat(this.x, 0, '.', '') + ' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Hunits + '';
+                    } else {
+                    return this.series.name + ': H(' + Highcharts.numberFormat(this.x, 0, '.', '') + ' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Hunits + '';
+                    }
+            }
+        }
+    }
+
+    var chartH = new Highcharts.Chart(options);
+};
+
+plotEntropy = function(id, Sseries) {
+
+    series = [];
+    for (var i = 0; i < Sseries.length; i++)
+        series.push({
+            name: Sseries[i][0],
+            data: Sseries[i][1]
+        });
+    var legendEnabled = (Sseries.length > 1);
+
+    options = {
+        chart: {
+            renderTo: id,
+            defaultSeriesType: 'line'
+        },
+        title: { text: 'Entropy' },
+        xAxis: {
+            title: { text: 'Temperature (' + Tunits + ')' },
+            min: 0
+        },
+        yAxis: {
+            title: { text: 'Entropy (' + Sunits + ')' }
+        },
+        legend: { enabled: legendEnabled },
+        series: series,
+        plotOptions: {
+            line: {
+                marker: { enabled: false }
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                    if (legendEnabled == 0) {
+                    return 'S(' + Highcharts.numberFormat(this.x, 0, '.', '') +' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Sunits + '';
+                    } else {
+                    return this.series.name + ': S(' + Highcharts.numberFormat(this.x, 0, '.', '') + ' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Sunits + '';
+                    }
+            }
+        }
+    }
+
+    var chartS = new Highcharts.Chart(options);
+};
+
+plotFreeEnergy = function(id, Gseries) {
+
+    series = [];
+    for (var i = 0; i < Gseries.length; i++)
+        series.push({
+            name: Gseries[i][0],
+            data: Gseries[i][1]
+        });
+    var legendEnabled = (Gseries.length > 1);
+
+    options = {
+        chart: {
+            renderTo: id,
+            defaultSeriesType: 'line'
+        },
+        title: { text: 'Gibbs free energy' },
+        xAxis: {
+            title: { text: 'Temperature (' + Tunits + ')' },
+            min: 0
+        },
+        yAxis: {
+            title: { text: 'Free energy (' + Gunits + ')' }
+        },
+        legend: { enabled: legendEnabled },
+        series: series,
+        plotOptions: {
+            line: {
+                marker: { enabled: false }
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                if (legendEnabled == 0) {
+                    return 'G(' + Highcharts.numberFormat(this.x, 0, '.', '') + ' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Gunits + '';
+                    } else {
+                    return this.series.name + ': G(' + Highcharts.numberFormat(this.x, 0, '.', '') + ' ' + Tunits + ') = ' + Highcharts.numberFormat(this.y, 2, '.', '') + ' ' + Gunits + '';
+                    }
+            }
+        }
+    }
+
+    var chartG = new Highcharts.Chart(options);
+};
+
+    
+    MathJax.Hub.Queue(function() {
+        plotHeatCapacity('plotCp', Cpseries);
+        plotEnthalpy('plotH', Hseries);
+        plotEntropy('plotS', Sseries);
+        plotFreeEnergy('plotG', Gseries);
+    });
+
+});
+</script>
+</head>
+<body>
+<div id="document">
+<div id="sidebar">
+<div id="logo">
+<a href="/">
+<img alt="RMG" height="100%" src="/static/img/rmg-logo.png"/>
+</a>
+</div>
+<div id="sidebar-content">
+<a href="http://reactionmechanismgenerator.github.io/RMG-Py">
+<div class="menuitem">
+<img class="icon" src="/static/img/documentation-icon.png" width="100%"/>
+<div class="menutext menutitle">Documentation</div>
+<div class="menutext menudesc">Learn more about the RMG software</div>
+</div>
+</a>
+<a href="/resources">
+<div class="menuitem">
+<img class="icon" src="/static/img/resources-icon.png" width="100%"/>
+<div class="menutext menutitle">Resources</div>
+<div class="menutext menudesc">RMG related publications and presentations</div>
+</div>
+</a>
+<a href="/database/">
+<div class="menuitem">
+<img class="icon" src="/static/img/database-icon.png" width="100%"/>
+<div class="menutext menutitle">Database</div>
+<div class="menutext menudesc">Browse the RMG database of chemical and kinetic parameters</div>
+</div>
+</a>
+<a href="/molecule_search">
+<div class="menuitem">
+<img class="icon" src="/static/img/molecule-icon.png" width="100%"/>
+<div class="menutext menutitle">Molecule Search</div>
+<div class="menutext menudesc">View molecules and adjlists or search properties</div>
+</div>
+</a>
+<a href="/database/kinetics/search/">
+<div class="menuitem">
+<img class="icon" src="/static/img/kinetics-icon.png" width="100%"/>
+<div class="menutext menutitle">Kinetics Search</div>
+<div class="menutext menudesc">Search kinetics of a chemical reaction</div>
+</div>
+</a>
+<a href="/database/solvation/search/">
+<div class="menuitem">
+<img class="icon" src="/static/img/solvation-icon.png" width="100%"/>
+<div class="menutext menutitle">Solvation Search</div>
+<div class="menutext menudesc">Search solvation properties of solvent and a solute</div>
+</div>
+</a>
+<a href="/pdep/">
+<div class="menuitem">
+<img class="icon" src="/static/img/pdep-icon.png" width="100%"/>
+<div class="menutext menutitle">Pressure Dependent Networks</div>
+<div class="menutext menudesc">Arkane pdep kinetic calculations</div>
+</div>
+</a>
+<a href="/tools/">
+<div class="menuitem">
+<img class="icon" src="/static/img/tools-icon.png" width="100%"/>
+<div class="menutext menutitle">Other RMG Tools</div>
+<div class="menutext menudesc">Additional tools to supplement RMG </div>
+</div>
+</a>
+</div>
+<div id="sidebar-extra">
+</div>
+<div id="sidebar-footer">
+<iframe allowtransparency="true" frameborder="0" height="20" scrolling="no" src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Frmg.mit&amp;width=50&amp;layout=button&amp;action=like&amp;size=small&amp;show_faces=false&amp;share=false&amp;height=65&amp;appId" style="border:none;overflow:hidden" width="51"></iframe>
+<a aria-label="Follow @ReactionMechanismGenerator on GitHub" class="github-button" href="https://github.com/ReactionMechanismGenerator">GitHub</a>
+</div>
+</div>
+<div id="mainbar">
+<div id="header">
+<div id="announcement">
+</div>
+<div class="user-toolbar">
+<a class="user-button" href="#" onclick="toggleCSS()">Change Theme</a>
+<a class="user-button" href="/login?next=/database/thermo/libraries/surfaceThermoPt/25/">Log In</a>
+</div>
+</div>
+<div id="main">
+<div id="navbar">
+<ul id="breadcrumb">
+<li><a href="/">Home</a></li>
+<li><a href="/database/">Database</a></li>
+<li><a href="/database/thermo/">Thermodynamics</a></li>
+<li><a href="/database/thermo/libraries/">Libraries</a></li>
+<li><a href="/database/thermo/libraries/surfaceThermoPt/">SurfaceThermoPt</a></li>
+<li><a href="/database/thermo/libraries/surfaceThermoPt/25/">25. HN-NH2_ads</a></li>
+</ul>
+</div>
+<div id="contents">
+<h1>25. HN-NH2_ads</h1>
+<h2>Structure</h2>
+<p>
+<a href="/database/molecule/1%20X%20u0%20p0%20c0%20%7B2,S%7D%0A2%20N%20u0%20p1%20c0%20%7B1,S%7D%20%7B3,S%7D%20%7B4,S%7D%0A3%20N%20u0%20p1%20c0%20%7B2,S%7D%20%7B5,S%7D%20%7B6,S%7D%0A4%20H%20u0%20p0%20c0%20%7B2,S%7D%0A5%20H%20u0%20p0%20c0%20%7B3,S%7D%0A6%20H%20u0%20p0%20c0%20%7B3,S%7D%0A"><img alt="1 X u0 p0 c0 {2,S}
+2 N u0 p1 c0 {1,S} {3,S} {4,S}
+3 N u0 p1 c0 {2,S} {5,S} {6,S}
+4 H u0 p0 c0 {2,S}
+5 H u0 p0 c0 {3,S}
+6 H u0 p0 c0 {3,S}
+" src="/molecule/1%2520X%2520u0%2520p0%2520c0%2520%257B2%252CS%257D%250A2%2520N%2520u0%2520p1%2520c0%2520%257B1%252CS%257D%2520%257B3%252CS%257D%2520%257B4%252CS%257D%250A3%2520N%2520u0%2520p1%2520c0%2520%257B2%252CS%257D%2520%257B5%252CS%257D%2520%257B6%252CS%257D%250A4%2520H%2520u0%2520p0%2520c0%2520%257B2%252CS%257D%250A5%2520H%2520u0%2520p0%2520c0%2520%257B3%252CS%257D%250A6%2520H%2520u0%2520p0%2520c0%2520%257B3%252CS%257D%250A" title="1 X u0 p0 c0 {2,S}
+2 N u0 p1 c0 {1,S} {3,S} {4,S}
+3 N u0 p1 c0 {2,S} {5,S} {6,S}
+4 H u0 p0 c0 {2,S}
+5 H u0 p0 c0 {3,S}
+6 H u0 p0 c0 {3,S}
+"/></a>
+</p>
+<h2>Thermodynamic Data</h2>
+<script type="math/tex; mode=display">
+\frac{C_\mathrm{p}^\circ(T)}{R} = a_{-2} T^{-2} + a_{-1} T^{-1} + a_0 + a_1 T + a_2 T^2 + a_3 T^3 + a_4 T^4</script>
+<script type="math/tex; mode=display">
+\frac{H^\circ(T)}{RT} = -a_{-2} T^{-2} + a_{-1} \frac{\ln T}{T} + a_0 + \frac{1}{2} a_1 T + \frac{1}{3} a_2 T^2 + \frac{1}{4} a_3 T^3 + \frac{1}{5} a_4 T^4 + \frac{a_5}{T}</script>
+<script type="math/tex; mode=display">
+\frac{S^\circ(T)}{R} = -\frac{1}{2} a_{-2} T^{-2} - a_{-1} T^{-1} + a_0 \ln T + a_1 T + \frac{1}{2} a_2 T^2 + \frac{1}{3} a_3 T^3 + \frac{1}{4} a_4 T^4 + a_6</script>
+<table class="thermoEntryData">
+<tr> <td class="key">Temperature range</td> <td class="equals">=</td> <td class="value">298 to 1000 K</td> <td class="value">1000 to 2000 K</td></tr>
+<tr> <td class="key"><script type="math/tex">a_{-2}</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">0</script></td> <td class="value"><script type="math/tex">0</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_{-1}</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">0</script></td> <td class="value"><script type="math/tex">0</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_0</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">1.4712 \times 10^{-1}</script></td> <td class="value"><script type="math/tex">1.11788 \times 10^{1}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_1</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">2.68376 \times 10^{-2}</script></td> <td class="value"><script type="math/tex">-8.42591 \times 10^{-3}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_2</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">-2.81255 \times 10^{-5}</script></td> <td class="value"><script type="math/tex">1.48661 \times 10^{-5}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_3</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">1.59595 \times 10^{-8}</script></td> <td class="value"><script type="math/tex">-7.79653 \times 10^{-9}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_4</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">-3.61741 \times 10^{-12}</script></td> <td class="value"><script type="math/tex">1.37881 \times 10^{-12}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_5</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">5.50809 \times 10^{3}</script></td> <td class="value"><script type="math/tex">2.71736 \times 10^{3}</script></td></tr>
+<tr> <td class="key"><script type="math/tex">a_6</script></td> <td class="equals">=</td> <td class="value"><script type="math/tex">-2.02314 \times 10^{0}</script></td> <td class="value"><script type="math/tex">-5.77901 \times 10^{1}</script></td></tr>
+</table>
+<table class="thermoEntryData"><tr><td class="key">Temperature range</td><td class="equals">=</td><td class="value">298 to 2000 K</td></tr></table>
+<br/>
+CHEMKIN format NASA Polynomial:
+<br/>
+<font face="courier">H3N2X                   H   3N   2X   1     G   298.000  2000.000 1000.00      1<br/> 1.11788248E+01-8.42590935E-03 1.48660894E-05-7.79652734E-09 1.37881132E-12    2<br/> 2.71736311E+03-5.77901499E+01 1.47120056E-01 2.68375643E-02-2.81255056E-05    3<br/> 1.59595219E-08-3.61741193E-12 5.50809497E+03-2.02313697E+00                   4<br/></font>
+<p>
+</p><div id="plotCp" style="width: 500px; height: 300px; margin: auto;"></div>
+<div id="plotH" style="width: 500px; height: 300px; margin: auto;"></div>
+<div id="plotS" style="width: 500px; height: 300px; margin: auto;"></div>
+<div id="plotG" style="width: 500px; height: 300px; margin: auto;"></div>
+<h2>Reference</h2>
+<table class="reference">
+<tr>
+<td class="label">Reference type:</td>
+<td></td>
+</tr>
+<tr>
+<td class="label">Short description:</td>
+<td></td>
+</tr>
+<tr>
+<td class="label">Long description:</td>
+<td style="white-space: pre-wrap;">Calculated by Katrin Blondal at Brown University using statistical mechanics (file: compute_NASA_for_Pt-adsorbates.ipynb). 
+            Based on DFT calculations by Jelena Jelic at KIT.
+            DFT binding energy: -1.270 eV.
+            Linear scaling parameters: ref_adatom_N = -4.352 eV, psi = 0.18029 eV, gamma_N(X) = 0.333.</td>
+</tr>
+</table>
+<br/>
+
+
+If you noticed a mistake or have better data, then edit this entry here: <a href="/database/thermo/libraries/surfaceThermoPt/25/edit"><button type="button">Edit entry</button></a>.
+
+
+You must <a href="/login?next=/database/thermo/libraries/surfaceThermoPt/25/">log in first.</a>
+<br/>
+</div>
+</div>
+<div id="footer">
+<div id="footer-content">
+                
+                Copyright © 2020,
+                <a href="http://web.mit.edu/greengp/people/">W. H. Green</a>,
+                <a href="http://www.northeastern.edu/comocheng/people/">R. H. West</a>,
+                <i>et al.</i>
+                Created using <a href="http://www.djangoproject.com/">Django</a>.
+                Read the <a href="/privacy">Privacy Policy</a>.
+                <br/>
+                Last updated: 12 Jun 2020 (RMG-Py), 8 Jun 2020 (RMG-database), 13 May 2020 (RMG-website).
+                See <a href="/version">Backend Version</a> for details.
+                
+            </div>
+</div>
+</div>
+</div>
+</body>
+</html>
