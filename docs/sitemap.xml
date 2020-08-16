@@ -3,15 +3,169 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/categories/</loc>
+    <loc>http://examplesite.org/</loc>
+    <lastmod>2020-03-23T13:05:29+06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/</loc>
+    <loc>http://examplesite.org/faq/</loc>
+    <lastmod>2020-03-23T13:05:29+06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/tags/</loc>
+    <loc>http://examplesite.org/tags/advice/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/ai/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/android/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/categories/artificial-intelligence/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/categories/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/company/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/categories/company-news/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-1/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-2/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-3/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-4/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-5/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/blog-post-6/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/blog/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/categories/legacy-support/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/mechine/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/news/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/retro/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/tags/technology/</loc>
+    <lastmod>2018-09-24T11:07:10+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/author/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/author/john-doe/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/author/mark-dinn/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/pricing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-2/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-4/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-5/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/code/rio-furniture-6/</loc>
+  </url>
+  
+  <url>
+    <loc>http://examplesite.org/service/</loc>
   </url>
   
 </urlset>
