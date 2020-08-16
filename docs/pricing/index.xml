@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Our Pricing on Ab-initio Synthesis of Amino acids</title>
-    <link>http://examplesite.org/pricing/</link>
+    <link>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/pricing/</link>
     <description>Recent content in Our Pricing on Ab-initio Synthesis of Amino acids</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright &amp;copy; 2020 [Themefisher](https://themefisher.com) All Rights Reserved</copyright>
     
-	<atom:link href="http://examplesite.org/pricing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/pricing/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
