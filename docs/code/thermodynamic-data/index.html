@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+  <title>Thermodynamic data collection</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Thermodynamic data collection">
+  <meta name="author" content="Sowmya Manojna">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/bootstrap/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/Ionicons/css/ionicons.min.css">
+  
+  <link rel="stylesheet" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/magnific-popup/magnific-popup.css">
+  
+  <link rel="stylesheet" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/slick/slick.css">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/scss/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/images/favicon.png" type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  
+</div>
+<!-- preloader end -->
+
+<header class="navigation">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <nav class="navbar">
+          
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Computational-Systems-Biology-project">
+              <img src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/images/logo.png" alt="Ab-initio Synthesis of Amino acids" class="img-responsive">
+            </a>
+          </div>
+          
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="/Computational-Systems-Biology-project/">Home</a></li>
+              
+              
+              
+              <li><a href="/Computational-Systems-Biology-project/preliminaries">Preliminaries</a></li>
+              
+              
+              
+              <li><a href="/Computational-Systems-Biology-project/code">Code</a></li>
+              
+              
+              
+              <li><a href="/Computational-Systems-Biology-project/results">Results</a></li>
+              
+              
+
+              
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-title bg-2" style="background-image: url('https://sowmyamanojna.github.io/Computational-Systems-Biology-project/');">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+          <h1>Thermodynamic data collection</h1>
+          <p>Thermodynamic data collection</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="post post-single">
+					<h2 class="post-title">Thermodynamic data collection</h2>
+					<div class="post-meta">
+						<ul>
+              <li><i class="ion-calendar"></i> August 10, 2020</li>
+              <li><i class="ion-android-people"></i>
+                Posted By
+                
+                <a class="text-primary" href="/Computational-Systems-Biology-project/author/sowmya-manojna">Sowmya Manojna</a>
+                
+              </li>
+              <li><i class="ion-pricetags"></i> 
+                
+                <a href="/Computational-Systems-Biology-project/tags/function"  target='_blank'>Function</a>
+								
+                , <a href="/Computational-Systems-Biology-project/tags/data"  target='_blank'>Data</a>
+								
+              </li>
+            </ul>
+					</div>
+					<div class="post-thumb">
+						<img class="img-responsive" src="/Computational-Systems-Biology-project/images/code/rmg-logo.png" alt="Thermodynamic data collection">
+					</div>
+					<div class="post-content post-excerpt">
+						<p>All thermodynamic data used in this study was obtained from the <a href="https://rmg.mit.edu/" target="_blank">RMG web server</a>. The RMG data base is jointly developed by William H. Green&rsquo;s research group at MIT and Richard H. West&rsquo;s research group at Northeastern University.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>The data available in RMG is segregated in the form of libraries and the data available in all libraries are represented in one of the two formats - NASA and Group Additivity.</p>
+<p>In the NASA format, coefficients of the NASA thermodynamic equations - heat capacity at constant pressure, standard enthalpy change and standard entropy change, for two different temperature regimes were available. The Group additivity format comprises of high charts of heat capacity at constant pressure, standard enthalpy change and standard entropy change as a function of temperature.</p>
+<p>As no index of compounds was available in the database and as parsing data from highcharts using Python was tough,
+data from the NASA format was alone parsed. Since the temperature ranges varied across different libraries, the coefficients and their respective temperature ranges were parsed from the web servers and stored in a CSV format.</p>
+<p>The data parsed was segregated based on the source library and the compound&rsquo;s label within the library. The source code used for parsing data from the RMG web server can be accessed <a href="https://github.com/sowmyamanojna/Computational-Systems-Biology-project/tree/master/code/parse_rmg_files" target="_blank">here</a>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Gao, C.W., Allen, J.W., Green, W.H., and West, R.H. (2016). Reaction mechanism generator: Automatic construction of chemical kinetic mechanisms. Computer Physics Communications, 203, 212 – 225. doi:<a href="https://doi.org/10.1016/j.cpc.2016.02.013" target="_blank">https://doi.org/10.1016/j.cpc.2016.02.013</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+					</div>
+					<div class="post-comments">
+						
+					</div>
+				</div>
+			</div>
+      <div class="col-md-4">
+        <aside class="sidebar"><div class="widget widget-latest-post">
+    <h4 class="widget-title">Latest Posts</h4>
+    
+    <div class="media">
+      <a class="pull-left" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/initial-network/">
+        <img class="media-object" src="/Computational-Systems-Biology-project/images/code/init_net2.png" alt="Initial Network Setup">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/initial-network/">Initial Network Setup</a></h4>
+        <p>A graph theory based approach has been used in …</p>
+      </div>
+    </div>
+    
+    <div class="media">
+      <a class="pull-left" href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/thermodynamic-data/">
+        <img class="media-object" src="/Computational-Systems-Biology-project/images/code/rmg-logo.png" alt="Thermodynamic data collection">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/thermodynamic-data/">Thermodynamic data collection</a></h4>
+        <p>All thermodynamic data used in this study was …</p>
+      </div>
+    </div>
+    
+  </div><div class="widget widget-category">
+    <h4 class="widget-title">Categories</h4>
+    <ul class="widget-category-list">
+      <li><a href="/Computational-Systems-Biology-project/categories/program">Program</a></li>
+    </ul>
+  </div><div class="widget widget-tag">
+    <h4 class="widget-title">Tags</h4>
+    <ul class="widget-tag-list">
+      <li><a href="/Computational-Systems-Biology-project/tags/data">Data</a></li>
+      <li><a href="/Computational-Systems-Biology-project/tags/function">Function</a></li>
+      <li><a href="/Computational-Systems-Biology-project/tags/network-setup">Network setup</a></li>
+    </ul>
+  </div></aside>
+
+      </div>
+		</div>
+	</div>
+</section>
+
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-manu">
+					<ul>
+            
+            <li><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/">Home</a></li>
+            
+            <li><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/about">About</a></li>
+            
+            <li><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/project">Code</a></li>
+            
+            <li><a href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/service">Results</a></li>
+            
+					</ul>
+				</div>
+				<p class="copyright">Copyright © 2020 <a href="https://themefisher.com">Themefisher</a> All Theme Rights Reserved</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&amp;libraries=places"></script>
+
+
+
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/slick/slick.min.js"></script>
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/plugins/google-map/gmap.js"></script>
+
+
+
+
+<script src="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/js/script.min.js"></script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-175587743-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>
