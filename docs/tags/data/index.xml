@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data on Ab-initio Synthesis of Amino acids</title>
-    <link>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/tags/data/</link>
+    <link>https://sowmyamanojna.github.io/Ab-initio-Synthesis-of-Amino-Acids/tags/data/</link>
     <description>Recent content in Data on Ab-initio Synthesis of Amino acids</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright &amp;copy; 2020 [Themefisher](https://themefisher.com) All Theme Rights Reserved</copyright>
-    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://sowmyamanojna.github.io/Computational-Systems-Biology-project/tags/data/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sowmyamanojna.github.io/Ab-initio-Synthesis-of-Amino-Acids/tags/data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Thermodynamic data collection</title>
-      <link>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/thermodynamic-data/</link>
+      <link>https://sowmyamanojna.github.io/Ab-initio-Synthesis-of-Amino-Acids/code/thermodynamic-data/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://sowmyamanojna.github.io/Computational-Systems-Biology-project/code/thermodynamic-data/</guid>
+      <guid>https://sowmyamanojna.github.io/Ab-initio-Synthesis-of-Amino-Acids/code/thermodynamic-data/</guid>
       <description>All thermodynamic data used in this study was obtained from the RMG web server. The RMG data base is jointly developed by William H. Green&amp;rsquo;s research group at MIT and Richard H.</description>
     </item>
     
